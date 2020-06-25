@@ -1,5 +1,5 @@
-CC = gcc
-LIBFLAGS=-g -O3 -lX11 -lImlib2
+CC = gcc -Wall -s
+LIBFLAGS= -O3 -lX11 -lImlib2
 SRC_DIR = ./src/
 OBJETOS_DIR = ./obj/
 BUILD_DIR = ./build/

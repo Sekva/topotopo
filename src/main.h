@@ -1,22 +1,24 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/shape.h>
 
+#include <Imlib2.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <signal.h>
 #include <math.h>
 #include <sys/time.h>
 #include <unistd.h>
 
-char* ClassName = "topotopo";
+#define NUM_PIXMAPS 2
+
+const char* ClassName = "topotopo";
 char* ProgramName;
 Display* display;
 char* display_name;
@@ -36,25 +38,23 @@ Window foco;
 XWindowAttributes attrib_foco;
 GC contexto;
 
-
 int pos_x, pos_y;
 int tamanho = 50;
-unsigned long** buffer;
 
-
-
-unsigned long RGBA(int r,int g, int b, int a) {
+unsigned long _RGBA(int r,int g, int b, int a) {
     return a + (b << 8) + (g<<16) + (r<<24);
 }
+unsigned long RGBA(int r,int g, int b, int a) {
+    return b + (g << 8) + (r<<16) + (a<<24);
+}
 unsigned long RGB(int r,int g, int b) {
-    return RGBA(255, r, g, b);
+    return _RGBA(255, r, g, b);
 }
 
-int trocar = 0;
+int trocar_pixmap = 0;
+int mover_pelo_mouse = 0;
 Pixmap pixmap_atual;
-Pixmap ayaya_pixmap;
-Pixmap ayaya_rodada_pixmap;
-Pixmap pixmaps[2];
+Pixmap pixmaps[NUM_PIXMAPS];
 
 typedef struct Pixel {
     unsigned int x;
