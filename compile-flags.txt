@@ -1,0 +1,6 @@
+-std=gnu99
+-Wall
+-Wextra
+-pedantic
+-g3
+-s

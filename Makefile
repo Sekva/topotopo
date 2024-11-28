@@ -1,5 +1,5 @@
-CC = gcc -Wall -s
-LIBFLAGS= -O3 -lX11 -lImlib2
+CC = gcc -std=gnu99 -Wall -Wextra -pedantic -g3 -s -O3
+LIBFLAGS= -lX11 -lm
 SRC_DIR = ./src/
 OBJETOS_DIR = ./obj/
 BUILD_DIR = ./build/
@@ -9,7 +9,10 @@ OBJS = $(SRCS:.c=.o)
 OBJS_FINAL = $(OBJS:%.o=$(OBJETOS_DIR)%.o)
 BIN = $(BUILD_DIR)$(BIN_NOME)
 
-all : $(BIN)
+all : dirs $(BIN)
+
+dirs:
+	@mkdir -pv $(BUILD_DIR) $(OBJETOS_DIR)
 
 $(BIN) : $(OBJS_FINAL)
 	$(CC) $(OBJS_FINAL) -o $(BIN) $(LIBFLAGS)
@@ -19,3 +22,6 @@ $(OBJS_FINAL) : $(OBJETOS_DIR)%.o : $(SRC_DIR)%.c
 
 clean :
 	rm  $(BIN) $(OBJS_FINAL)
+
+run: all
+	$(BIN)
