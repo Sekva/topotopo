@@ -1,5 +1,6 @@
-CC = gcc -std=gnu99 -Wall -Wextra -pedantic -g3 -s -O3
-LIBFLAGS= -lX11 -lm
+CC = gcc
+CFLAGS = -std=gnu99 -Wall -Wextra -pedantic -g3 -s -O3 -DVIZINHO
+LIBFLAGS= -lX11 -lm -lpng
 SRC_DIR = ./src/
 OBJETOS_DIR = ./obj/
 BUILD_DIR = ./build/
@@ -18,7 +19,7 @@ $(BIN) : $(OBJS_FINAL)
 	$(CC) $(OBJS_FINAL) -o $(BIN) $(LIBFLAGS)
 
 $(OBJS_FINAL) : $(OBJETOS_DIR)%.o : $(SRC_DIR)%.c
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm  $(BIN) $(OBJS_FINAL)
